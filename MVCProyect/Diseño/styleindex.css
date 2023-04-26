@@ -1,0 +1,36 @@
+body{
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)!important; 
+    width: 80vw!important;
+}
+/*SECTION LIST IMAGE*/
+.imagelist{
+    width: 19vw;
+    max-height: 22vw!important;
+}
+section{
+    padding:1rem;
+    /* display: inline-block; */
+}
+section img{
+    width: 0px;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .6;
+    transition: .8s ease;
+}
+section img:hover{
+    /* cursor: ; */
+    width:25vw;
+    opacity: 1;
+    filter: contrast(120%);
+}
+.lista1{
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+.card{
+    background: linear-gradient(112.1deg, rgb(56, 65, 96) 11.4%, rgb(87, 104, 163) 70.2%)!important; 
+    width: 90vw!important;
+}
+/*END SECTION LIST*/
+    
