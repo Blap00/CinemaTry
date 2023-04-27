@@ -76,13 +76,13 @@ require_once "./Modelo/imagen.php";
                   //Acceder al número de URLs mediante la propiedad del objeto devuelto por la consulta
                   $num_urls = $cantidad->{'count(`numb_id`)'};
                   //Abre ciclo for, de 1 hasta el total de cantidad en la BBDD
-                  for($i=1; $i<=$num_urls; $i++) {
+                  for($f=1; $f<=$num_urls; $f++) {
                   //Accede a la URL que tiene la imagen en este caso //Ejemplo de file_url: https://cartelera.elpais.com/assets/uploads/2019/06/28030126/C_05611.jpg
-                  $url = $this->modelo->getUrlEspecificaSu($i);
+                  $url = $this->modelo->getUrlEspecificaSu($f);
                   //Obtiene el URL especifico con la imagen.
                   $especific_url= $url->{'file_url'};
                   //Accede al nombre individual del archivo.
-                  $names= $this->modelo->getNameSu($i);
+                  $names= $this->modelo->getNameSu($f);
                   //Obtiene el nombre especifico del archivo.
                   $especificName= $names->{'Nombre'};
                 ?>

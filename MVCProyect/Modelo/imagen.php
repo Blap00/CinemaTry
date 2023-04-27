@@ -53,33 +53,29 @@
             try{
                 $consulta=$this->pdo->prepare("SELECT count(`numb_id`) FROM `imagecinema` where Categoria='Suspenso' ;");
                 $consulta->execute();
-                var_dump($consulta);
                 return $consulta->fetch(PDO::FETCH_OBJ);
             } catch(Exception $e){
                 die($e->getMessage());
 
             }
         }
-        public function getUrlEspecificaSu(int $i){
+        public function getUrlEspecificaSu(int $f){
             try{
+                $i=$f+4;
                 $consulta=$this->pdo->prepare("SELECT file_url from `imagecinema` where numb_id=$i and Categoria='Suspenso';");
                 $consulta->execute();
-                var_dump($consulta);
                 return $consulta->fetch(PDO::FETCH_OBJ);
             } catch(Exception $e){
                 die($e->getMessage());
             }
         }
-        public function getNameSu(int $i){
+        public function getNameSu(int $f){
             try{
+                $i=$f+4;    
                 $consulta=$this->pdo->prepare("SELECT Nombre from `imagecinema` where numb_id=$i and Categoria='Suspenso' ;");
                 $consulta->execute();
-                var_dump($consulta);
                 $resultado = $consulta->fetch(PDO::FETCH_OBJ);
-                    if ($resultado !== false) {
-                    echo $resultado->file_url;
-                    }
-                // return $consulta->fetch(PDO::FETCH_OBJ);
+                return $resultado;
             } catch(Exception $e){
                 die($e->getMessage());
             }
