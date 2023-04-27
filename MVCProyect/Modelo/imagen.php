@@ -9,9 +9,9 @@
         public function __CONSTRUCT(){
             $this->pdo=BasedeDatos::Conectar();
         }
-        // public function getURL(){
-        //     return $this->file_url;
-        // }
+        public function getURL(){
+            return $this->file_url;
+        }
         public function getID(){
             return $this->numb_id;
         }
@@ -59,20 +59,51 @@
 
             }
         }
-        public function getUrlEspecificaSu(int $f){
+            public function getUrlEspecificaSu(int $f, int $cac){
+                try{
+                    $i=$f+$cac;
+                    $consulta=$this->pdo->prepare("SELECT file_url from `imagecinema` where numb_id=$i and Categoria='Suspenso';");
+                    $consulta->execute();
+                    return $consulta->fetch(PDO::FETCH_OBJ);
+                } catch(Exception $e){
+                    die($e->getMessage());
+                }
+            }
+        public function getNameSu(int $f, int $cac){
             try{
-                $i=$f+4;
-                $consulta=$this->pdo->prepare("SELECT file_url from `imagecinema` where numb_id=$i and Categoria='Suspenso';");
+                $i=$f+$cac;    
+                $consulta=$this->pdo->prepare("SELECT Nombre from `imagecinema` where numb_id=$i and Categoria='Suspenso' ;");
                 $consulta->execute();
-                return $consulta->fetch(PDO::FETCH_OBJ);
+                $resultado = $consulta->fetch(PDO::FETCH_OBJ);
+                return $resultado;
             } catch(Exception $e){
                 die($e->getMessage());
             }
         }
-        public function getNameSu(int $f){
+        public function getCantAV(){
             try{
-                $i=$f+4;    
-                $consulta=$this->pdo->prepare("SELECT Nombre from `imagecinema` where numb_id=$i and Categoria='Suspenso' ;");
+                $consulta=$this->pdo->prepare("SELECT count(`numb_id`) FROM `imagecinema` where Categoria='Aventura' ;");
+                $consulta->execute();
+                return $consulta->fetch(PDO::FETCH_OBJ);
+            } catch(Exception $e){
+                die($e->getMessage());
+
+            }
+        }
+            public function getUrlEspecificaAV(int $f, int $cacsu){
+                try{
+                    $i=$f+$cacsu;
+                    $consulta=$this->pdo->prepare("SELECT file_url from `imagecinema` where numb_id=$i and Categoria='Aventura';");
+                    $consulta->execute();
+                    return $consulta->fetch(PDO::FETCH_OBJ);
+                } catch(Exception $e){
+                    die($e->getMessage());
+                }
+            }
+        public function getNameAV(int $f, int $cacsu){
+            try{
+                $i=$f+$cacsu;    
+                $consulta=$this->pdo->prepare("SELECT Nombre from `imagecinema` where numb_id=$i and Categoria='Aventura' ;");
                 $consulta->execute();
                 $resultado = $consulta->fetch(PDO::FETCH_OBJ);
                 return $resultado;

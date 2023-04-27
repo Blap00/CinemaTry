@@ -35,6 +35,7 @@ require_once "./Modelo/imagen.php";
                   $cantidad = $this->modelo->getCantAC(); 
                   //Acceder al número de URLs mediante la propiedad del objeto devuelto por la consulta
                   $num_urls = $cantidad->{'count(`numb_id`)'};
+                  $cac =$num_urls;
                   //Abre ciclo for, de 1 hasta el total de cantidad en la BBDD
                   for($i=1; $i<=$num_urls; $i++) {
                   //Accede a la URL que tiene la imagen en este caso //Ejemplo de file_url: https://cartelera.elpais.com/assets/uploads/2019/06/28030126/C_05611.jpg
@@ -75,14 +76,56 @@ require_once "./Modelo/imagen.php";
                   $cantidad = $this->modelo->getCantSu(); 
                   //Acceder al número de URLs mediante la propiedad del objeto devuelto por la consulta
                   $num_urls = $cantidad->{'count(`numb_id`)'};
+                  $cacsu=$cac+$num_urls;
                   //Abre ciclo for, de 1 hasta el total de cantidad en la BBDD
                   for($f=1; $f<=$num_urls; $f++) {
                   //Accede a la URL que tiene la imagen en este caso //Ejemplo de file_url: https://cartelera.elpais.com/assets/uploads/2019/06/28030126/C_05611.jpg
-                  $url = $this->modelo->getUrlEspecificaSu($f);
+                  $url = $this->modelo->getUrlEspecificaSu($f, $cac);
                   //Obtiene el URL especifico con la imagen.
                   $especific_url= $url->{'file_url'};
                   //Accede al nombre individual del archivo.
-                  $names= $this->modelo->getNameSu($f);
+                  $names= $this->modelo->getNameSu($f, $cac);
+                  //Obtiene el nombre especifico del archivo.
+                  $especificName= $names->{'Nombre'};
+                ?>
+                  <td>
+                    <img style="max-height: 22vw;" class="imagelist" alt="<?= $especificName ?>" src="<?=/* CARGA EN EL SRC el URL para cargar la imagen */ $especific_url; ?>">
+                    <p class="card-subtitle"><?= $especificName ?></p>
+                  </td>
+                <?php
+                  }
+                ?>
+              </table>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="Lista1" style="padding-top: 1rem ;">
+      <div class="col-md-6" style="width:90%!important; padding-left:5vw; padding-rigth:5vw">
+      <!-- Start Action CARD -->
+        <div class="card card1!important" style=" ">
+        <!-- Set title -->
+          <h3 class="card-title">Peliculas de Aventuras</h3>
+          <!-- inside card -->
+          <div class="ListadePeliculas3">
+            <section>
+              <table>
+                <th></th>
+                <?php 
+                  //Obtener la cantidad de URLs utilizando el modelo
+                  $cantidad = $this->modelo->getCantAV(); 
+                  //Acceder al número de URLs mediante la propiedad del objeto devuelto por la consulta
+                  $num_urls = $cantidad->{'count(`numb_id`)'};
+                  $cacsuva=$cacsu+$num_urls;
+                  //Abre ciclo for, de 1 hasta el total de cantidad en la BBDD
+                  for($ad=1; $ad<=$num_urls; $ad++) {
+                  //Accede a la URL que tiene la imagen en este caso //Ejemplo de file_url: https://cartelera.elpais.com/assets/uploads/2019/06/28030126/C_05611.jpg
+                  $url = $this->modelo->getUrlEspecificaAV($ad, $cacsu);
+                  //Obtiene el URL especifico con la imagen.
+                  $especific_url= $url->{'file_url'};
+                  //Accede al nombre individual del archivo.
+                  $names= $this->modelo->getNameAV($ad, $cacsu);
                   //Obtiene el nombre especifico del archivo.
                   $especificName= $names->{'Nombre'};
                 ?>
