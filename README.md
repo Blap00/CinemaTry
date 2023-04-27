@@ -1,2 +1,3 @@
-# CinemaTry
- study by Blap
+# Cinema shop project
+ study project
+ # by Blap
