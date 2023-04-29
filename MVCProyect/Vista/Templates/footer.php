@@ -1,5 +1,6 @@
 <footer class="md-3">
-  <br><br><br><br><br>this is the footer <br>
+  <!-- <br><br><br><br><br>this is the footer <br> -->
+  <h4>developed by Blap(Fabian Palma)</h4>
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
