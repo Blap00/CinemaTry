@@ -1,10 +1,16 @@
 body{
     background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)!important; 
     width: 80vw!important;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 /*SECTION LIST IMAGE*/
 img{
     aspect-ratio: 3/5;
+}
+tr{
+    display: flex!important;
 }
 p{
  overflow-wrap: break-word;
@@ -40,4 +46,4 @@ section img:hover{
     width: 90vw!important;
 }
 /*END SECTION LIST*/
-    
+/*FOOTER*/

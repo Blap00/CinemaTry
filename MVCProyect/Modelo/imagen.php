@@ -12,6 +12,7 @@
         public function __CONSTRUCT(){
             $this->pdo=BasedeDatos::Conectar();
         }
+        //Category 1
         public function resultado1(){
             try {
                 $consulta = $this->pdo->prepare("SELECT * FROM `productos` WHERE disponible=1 and idCategoria=1;");
@@ -44,7 +45,17 @@
                 return null;
             }
         }
-
+        //Filtrado count;
+        public function filtrado(int $id){
+            try {
+                $consulta = $this->pdo->prepare("SELECT * FROM `productos` WHERE idPelicula='$id' and disponible>=1");
+                $consulta->execute();               
+                return $consulta->fetch(PDO::FETCH_ASSOC); //LO TENIA EN (PDO::FETCH_OBJ) :D
+            } catch (PDOException $e) {
+                echo "Error de conexión: " . $e->getMessage();
+                return null;
+            }
+        }
     }
 ?>
         <!-- // Create public function to get and set data
