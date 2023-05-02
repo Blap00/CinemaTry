@@ -81,7 +81,7 @@ require_once "./controladores/config.php";
                     } 
                     ?>
                     <td>
-                    <a href="?"><img style="max-height: 22vw;" class="imagelist" alt="<?php echo $row['nombrePelicula']; ?>" src="<?php echo $image; /* CARGA EN EL SRC el URL para cargar la imagen */?>"></a>
+                    <a href="details.php?id=<?php echo $row['idPelicula']; ?>&token=<?php echo hash_hmac('sha256',$row['idPelicula'],KEY_TOKEN); ?>"><img style="max-height: 22vw;" class="imagelist" alt="<?php echo $row['nombrePelicula']; ?>" src="<?php echo $image; /* CARGA EN EL SRC el URL para cargar la imagen */?>"></a>
                     <div style="text-align:center; padding-top:1rem;">
                     <p class="card-text text-info"><?php echo $row['nombrePelicula']; ?></p>
                     <p class="card-text text-primary">$<?php echo number_format($row['precio'],0,'.',',');?></p>
@@ -130,7 +130,7 @@ require_once "./controladores/config.php";
                     } 
                     ?>
                     <td>
-                    <a href="?"><img style="max-height: 22vw;" class="imagelist" alt="<?php echo $row['nombrePelicula']; ?>" src="<?php echo $image; /* CARGA EN EL SRC el URL para cargar la imagen */?>"></a>
+                    <a href="details.php?id=<?php echo $row['idPelicula']; ?>&token=<?php echo hash_hmac('sha256',$row['idPelicula'],KEY_TOKEN); ?>"><img style="max-height: 22vw;" class="imagelist" alt="<?php echo $row['nombrePelicula']; ?>" src="<?php echo $image; /* CARGA EN EL SRC el URL para cargar la imagen */?>"></a>
                     <div style="text-align:center; padding-top:1rem;">
                     <p class="card-text text-info"><?php echo $row['nombrePelicula']; ?></p>
                     <p class="card-text text-primary">$<?php echo number_format($row['precio'],0,'.',',');?></p>

@@ -25,6 +25,8 @@
                 $sinopsis = $row['sinopsis'];
                 $imagen = "./Diseño/img/$id/principal.jpg";
                 $precio = $row['precio'];
+                $discount= $row['descuento'];
+                $preciodesc= $precio-($precio*($discount/100));
             } else{
                 echo $error_message;
                 $isIdandToken=false;
@@ -48,8 +50,16 @@
                     <div class="card" style="max-width: 98%">
                         <div class="card-body">
                             <!-- ELEMENTOS PELICULA -->
-                            <h1 class="card-title">Pelicula: <?=$nombre?></h1>
-                            <h3 class="card-subtitle mb-3 text-muted">Precio: <?php echo MONEDACLP . number_format($precio, 2, '.', ',') ?></h3>
+                            <h1 class="card-title">Pelicula: <?=$nombre?> </h1>
+                            <?php if($discount!=0){ ?>
+                                <div class="globoatencion">
+                                    <h3 style="text-align: right;" class="card-subtitle mb-2 lead">DESCUENTO ACTUAL: <?= $discount ?>%</h3>
+                                </div>
+                            <?php } ?>
+                            <h3 class="card-subtitle mb-3 text-muted">Precio: <?php if($discount!=0){
+                              echo MONEDACLP . number_format($preciodesc,2, '.', ','); echo " Antes: ". MONEDACLP . number_format($precio, 2, '.', ',');
+                            } else{
+                                echo MONEDACLP . number_format($precio, 2, '.', ',');  }?></h3>
                             <p class="card-text lead">
                                 <?= $sinopsis ?>
                             </p>
