@@ -46,4 +46,9 @@ section img:hover{
     width: 90vw!important;
 }
 /*END SECTION LIST*/
+.table-container-flex{
+    overflow-x: auto;
+    width: 100%!important;
+    background-color: white!important;
+}
 /*FOOTER*/

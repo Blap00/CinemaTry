@@ -70,17 +70,27 @@
         //         return null;
         //     }
         // }
-        public function resultadoCheckout(){
-            try {
-                $consulta = $this->pdo->prepare("SELECT * FROM `productos` WHERE disponible=1");
+        public function resultadoCheckout($id, $asientos){
+            try{
+                $consulta = $this->pdo->prepare("SELECT * FROM `productos` WHERE idPelicula=? AND disponible=1");
+                $consulta->bindParam(1, $id);
                 $consulta->execute();
-                $listaCarrito[] = $consulta->fetchAll(PDO::FETCH_ASSOC); 
-                return $listaCarrito;              
-            } catch (PDOException $e) {
+        
+                if($consulta->rowCount() == 1){
+                    $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+                    $resultado['asientos'] = $asientos;
+                    return $resultado;
+                } else {
+                    return null;
+                }
+        
+            } catch(PDOException $e){
                 echo "Error de conexión: " . $e->getMessage();
                 return null;
             }
         }
+        
+        
         
         
     }
