@@ -1,4 +1,3 @@
-<div class="PHPCODE" id="CODIGOPHP">
     <?php
         require_once "./controladores/config.php";
         require_once "./Modelo/imagen.php";
@@ -33,13 +32,16 @@
             }
         }
     ?>
-</div>
 <!-- Body+Header -->
 <main>
     <!-- It works, the TOKEN and ID is OK -->
     <?php if($isIdandToken==true){ ?>
         <br>
         <br><br>
+    <?php
+        // session_destroy();
+        // print_r($_SESSION);
+    ?>
     <div class="container-fluid">
         <div class="row">
                 <div class="col-lg-4 order-lg-1 mb-3">
@@ -51,21 +53,23 @@
                         <div class="card-body">
                             <!-- ELEMENTOS PELICULA -->
                             <h1 class="card-title">Pelicula: <?=$nombre?> </h1>
-                            <?php if($discount!=0){ ?>
-                                <div class="globoatencion">
-                                    <h3 style="text-align: right;" class="card-subtitle mb-2 lead">DESCUENTO ACTUAL: <?= $discount ?>%</h3>
-                                </div>
+                            <?php if($discount>0){ ?>
+                                <p>PRECIO: <del><?php echo MONEDACLP . number_format($precio, 2, '.', ','); ?> </h3></del></p>
+                                    <h3 style="" class="">
+                                        <?php echo MONEDACLP . number_format($preciodesc, 2, '.', ',');?>
+                                        <small class="text-success"><?php  echo $discount ?> % descuento</small>
+                                    </h3>
+
+                            <?php }else{ ?>
+                                <p>PRECIO: <?php echo MONEDACLP . number_format($precio, 2, '.', ','); ?> </h3></p>
                             <?php } ?>
-                            <h3 class="card-subtitle mb-3 text-muted">Precio: <?php if($discount!=0){
-                              echo MONEDACLP . number_format($preciodesc,2, '.', ','); echo " Antes: ". MONEDACLP . number_format($precio, 2, '.', ',');
-                            } else{
-                                echo MONEDACLP . number_format($precio, 2, '.', ',');  }?></h3>
+
                             <p class="card-text lead">
-                                <?= $sinopsis ?>
+                                <h5 class="font-weight-bold"><?= $sinopsis ?></h5>
                             </p>
                             <div class="d-grid gap-3 col-10 mx-auto">
                                 <button class="btn btn-primary" type="button">Comprar ahora</button>
-                                <button class="btn btn-primary-primary" type="button">Agregar al carrito</button>
+                                <button class="btn btn-primary-primary" type="button" onclick="addPelicula(<?php echo $id ?>, '<?php echo $token_temp ?>')">Agregar al carrito</button>
                             </div>
                         </div>
                     </div>
@@ -81,3 +85,23 @@
     </div>
     <?php } ?>
  </main>
+ <script>
+    let formData;
+    function addPelicula(id, token){
+      let url= 'controladores/addToCart.php'
+      let formData = new FormData()
+      formData.append('id',id)
+      formData.append('token',token)
+      fetch(url, {
+        method: 'POST',
+        body: formData,
+        mode: 'cors'
+      }).then(response=>response.json()).then(data =>{
+        if(data.ok){
+          let elemento = document.getElementById('Cart')
+          elemento.innerHTML= data.numero
+        }
+      })
+      
+    }
+  </script>

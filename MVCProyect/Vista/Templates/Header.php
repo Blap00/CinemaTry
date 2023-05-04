@@ -1,5 +1,6 @@
 <?php
 $currentPage = basename($_SERVER['PHP_SELF']);
+require_once "./controladores/config.php";
 ?>
 <!doctype html>
 <html lang="es">
@@ -41,7 +42,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <button class="btn btn-outline-danger" type="submit"><?php require_once "./Diseño/templateimage/imgbag.php" ?></button>
+                    <button class="btn btn-outline-danger"  type="submit"><?php require_once "./Diseño/templateimage/imgbag.php" ?><span id="Cart" class="badge bg-primary"><?php echo $num_cart ?></span></button>
                 </form>
             </div>
         </div>
