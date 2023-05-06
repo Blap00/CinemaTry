@@ -1,10 +1,11 @@
 body{
     background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)!important; 
-    width: 80vw!important;
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
+.row {
+    --bs-gutter-x: 0!important; } 
 /*SECTION LIST IMAGE*/
 img{
     aspect-ratio: 3/5;
@@ -38,12 +39,12 @@ section img:hover{
     filter: contrast(120%);
 }
 .lista1{
-    padding-left: 5vw;
-    padding-right: 5vw;
+    padding-left: 0vw;
+    padding-right: 0vw;
 }
 .card{
     background: linear-gradient(112.1deg, rgb(56, 65, 96) 11.4%, rgb(87, 104, 163) 70.2%)!important; 
-    width: 90vw!important;
+    /* width: 90vw!important; */
 }
 /*END SECTION LIST*/
 .table-container-flex{

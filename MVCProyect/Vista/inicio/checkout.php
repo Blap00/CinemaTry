@@ -25,38 +25,43 @@ if($producto!=null){
 <!-- mostrar tabla con detalles del carrito -->
 <main>
     <br><br><br>
-    <!-- <div class="table-responsive" style="background-color: #fff;">
-        <table class="table"> -->
-    <div class="table-responsive table-container-flex" >
-        <table class="table">
+    <div class="table-responsive" style="background-color: white!important;">
+        <table class="table table-auto">
             <thead>
-                <tr>
-                    <th>Pelicula</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>SubTotal</th>
-                    <th>Disponible</th>
-                    <th>Opciones</th>
+                <tr style="display: contents!important;">
+                    <th scope="col">Pelicula</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Asientos solicitados</th>
+                    <th scope="col">Asientos disponibles</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 if(isset($carrito)){
                     foreach($carrito as $item){
+                        //GET ID
+                        $_id= $item['idPelicula'];
                         // convert "precio" to float before multiplying
-                        $precio = floatval($item["precio"]);
-                        // calculate subtotal
-                        $subtotal = $precio * $item["asientos"];
+                        $precio = (floatval($item["precio"]));
+                        // calculate "Precio"-"Precio"*"Descuento"%
+                        $precioDesc= ((floatval($item["precio"]))-((floatval($item["precio"]))*floatval($item["descuento"])/100));
+                        // multiply "PecioDesc" with number of "Asientos"
+                        $subtotal = ($precioDesc) * $item["asientos"];
+                        $subtotal= intval($subtotal);
+                        $asientosdisp= $item['asientos'] - (is_array($item["asientos"]) ? $item["asientos"][0] : $item["asientos"]);
                         $precio = is_array($item["precio"]) ? $item["precio"][0] : $precio;
                         $cantidad = is_array($item["asientos"]) ? $item["asientos"][0] : $item["asientos"]; 
 
                         ?>
-                        <tr>
+                        <tr style="display: revert!important;">
                             <td><?php echo $item["nombrePelicula"] ?></td><!--nombre-->
                             <td><?php echo is_array($item["precio"]) ? $item["precio"][0] : $item["precio"] ?></td> <!--precio-->
-                            <td><?php echo is_array($item["asientos"]) ? $item["asientos"][0] : $item["asientos"] ?></td> <!--asientos-->
-                            <td><?php echo $subtotal ?></td> <!--subtotal-->
-                            <td><?php echo $item["disponible"] ?></td> <!--disponible-->
+                            <td><?php echo is_array($item["asientos"]) ? $item["asientos"][0] : $item["asientos"] ?></td> <!--asientos solicitados-->
+                            <td><?php echo is_array($item['asientos']) ? $item['asientos'][0] : $item['asientos'] ?></td> <!--Asientos disponibles-->
+                            <td> <div id="Subtotal_<?=$_id?>"></div>
+                                <?php echo $subtotal ?></td> <!--subtotal-->    
                             <td>
                                 <form action="" method="post">
                                     <input type="hidden" name="clave" value="<?php echo $item["idPelicula"] ?>">
@@ -78,3 +83,4 @@ if($producto!=null){
         </table>
     </div>
 </main>
+
